@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">uctickets</string>
+    <string name="action_settings">Settings</string>
+    <string name="hello_world">Hello world!</string>
+    <string name="title_activity_login">LoginActivity</string>
+    <string name="title_activity_home">HomeActivity</string>
+    <string name="title_activity_services">ServicesActivity</string>
+    <string name="title_activity_locals">LocalsActivity</string>
+    <string name="title_activity_tickets">TicketsActivity</string>
+
+</resources>

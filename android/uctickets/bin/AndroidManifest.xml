@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="pt.uc.dei.mrc.uctickets.ui"
+    android:versionCode="1"
+    android:versionName="1.0" >
+
+    <uses-sdk
+        android:minSdkVersion="8"
+        android:targetSdkVersion="17" />
+
+    <application
+        android:allowBackup="true"
+        android:icon="@drawable/ic_launcher"
+        android:label="@string/app_name"
+        android:theme="@style/AppTheme" >
+        <activity
+            android:name="pt.uc.dei.mrc.uctickets.ui.MainActivity"
+            android:label="@string/app_name" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name="pt.uc.dei.mrc.uctickets.ui.LoginActivity"
+            android:theme="@android:style/Theme.Black.NoTitleBar.Fullscreen"
+            android:label="@string/title_activity_login" >
+        </activity>
+        <activity
+            android:name="pt.uc.dei.mrc.uctickets.ui.HomeActivity"
+            android:theme="@android:style/Theme.Black.NoTitleBar.Fullscreen"
+            android:label="@string/title_activity_home" >
+        </activity>
+        <activity
+            android:name="pt.uc.dei.mrc.uctickets.ui.ServicesActivity"
+            android:theme="@android:style/Theme.Black.NoTitleBar.Fullscreen"
+            android:label="@string/title_activity_services" >
+        </activity>
+        <activity
+            android:name="pt.uc.dei.mrc.uctickets.ui.LocalsActivity"
+            android:theme="@android:style/Theme.Black.NoTitleBar.Fullscreen"
+            android:label="@string/title_activity_locals" >
+        </activity>
+        <activity
+            android:name="pt.uc.dei.mrc.uctickets.ui.TicketsActivity"
+            android:theme="@android:style/Theme.Black.NoTitleBar.Fullscreen"
+            android:label="@string/title_activity_tickets" >
+        </activity>
+    </application>
+
+</manifest>
