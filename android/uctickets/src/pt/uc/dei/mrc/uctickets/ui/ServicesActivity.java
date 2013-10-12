@@ -1,54 +1,50 @@
 package pt.uc.dei.mrc.uctickets.ui;
 
+import java.util.ArrayList;
+
+import pt.uc.dei.mrc.uctickets.apiclient.Job;
+import pt.uc.dei.mrc.uctickets.models.Local;
+import pt.uc.dei.mrc.uctickets.models.Service;
+
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.app.ActionBar.LayoutParams;
 import android.app.Activity;
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.graphics.Color;
+import android.util.Log;
 import android.view.Menu;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.LinearLayout;
+import android.widget.ListView;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
+import android.widget.TextView;
+import android.widget.Toast;
 
 public class ServicesActivity extends Activity {
 	
-	LinearLayout ll;
+	private ArrayList<Service> servicelist;
+	
+	ListView listview;
+	 
+	private ProgressDialog dialog;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_services);
 		
-		ll = (LinearLayout)findViewById(R.id.linear_layout);
-		
-		/*
-		 * Aqui tem que ser chamada uma AsyncTask para criar os RadioButton dos Serviços:
-		 * 	- Académicos
-		 * 	- Tesouraria
-		 * 	- SASUC 
-		 * 
-		 */
-		
-		createRadioButton();
-		
-		Button btLogin = (Button)findViewById(R.id.tolocals);
-
-		btLogin.setOnClickListener(new View.OnClickListener() 
-		{ 
-			public void onClick(View v)
-			{
-			
-				Intent i = new Intent(ServicesActivity.this, LocalsActivity.class);
-				startActivity(i);
-				
-			}
-		});
-		
-	}	
-
+		new ServicesLoadTask().execute();
 	
+	
+		
+	}
+
 
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
@@ -57,21 +53,109 @@ public class ServicesActivity extends Activity {
 		return true;
 	}
 	
-	private void createRadioButton() {
-	    final RadioButton[] rb = new RadioButton[5];
-	    final RadioGroup rg = new RadioGroup(this); //create the RadioGroup
-	    rg.setOrientation(RadioGroup.VERTICAL);//or RadioGroup.VERTICAL
-	    
-	    for(int i=1; i<4; i++){
-	        rb[i]  = new RadioButton(this);
-	        rb[i].setTextColor(Color.rgb(0, 201, 234));
-	        rg.addView(rb[i]); //the RadioButtons are added to the radioGroup instead of the layout
-	        rb[i].setText("Serviço " + i);
-	    }
-	    
-	    ll.addView(rg);//you add the whole RadioGroup to the layout
-	    
-	    
+	private void populateListView() {
+		   
+		ListView list = (ListView) findViewById(R.id.Servicelist);
+		
+		ArrayAdapter<Service> adapter = new ArrayAdapter<Service>(this, android.R.layout.simple_list_item_1, servicelist);
+        
+		list.setAdapter(adapter);
+
+		list.setBackgroundColor(Color.rgb(0, 201, 234));
+		
+		list.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+
+		    @Override
+		    public void onItemClick(AdapterView<?> parent, android.view.View view, int position, long id) {
+		    	
+		    	//Intent to Next Activity
+		    	Intent i = new Intent(ServicesActivity.this, LocalsActivity.class);
+		    	
+		    	//Local l = (Local)parent.getAdapter().getItem(position); // Local Object
+		    	
+		    	//Toast.makeText(getApplicationContext(), ">"+l.getLID(), Toast.LENGTH_SHORT).show();
+		    	
+		    	//i.putExtra("local", Local l );
+		    	
+		    	//Construir Objecto Ticket para enviar
+				
+		    	startActivity(i);
+		    	
+		       // Toast.makeText(getApplicationContext(), ((TextView) view).getText(), Toast.LENGTH_SHORT).show();
+		    }
+		});
 	}
+	
+	/**
+	 * Represents an asynchronous local task used to get locals
+	 */
+	private class ServicesLoadTask extends AsyncTask<String, Void, Boolean> 
+	{
+		protected boolean loadServices()
+		{
+			try{
+				servicelist = Job.serviceslist();
+				
+				Log.w("UCFRONTDESK", ">>> " + servicelist.get(0).getName() ); 
+				
+			}catch(Exception e){
+				Toast.makeText(getApplicationContext(), e.toString(), Toast.LENGTH_SHORT).show();
+			}
+			
+			if (servicelist == null){	
+				//Toast.makeText(getApplicationContext(), servicelist.size(), Toast.LENGTH_SHORT).show();
+				return false;
+			}
+			
+			return true;
+			
+		}
+
+		protected Boolean doInBackground(String... params) 
+		{
+			if (loadServices())
+			{
+				
+				
+				return true;
+			}
+			else
+			{
+				return false;
+			}
+		}      
+
+		@Override
+		protected void onPostExecute(Boolean result) 
+		{
+			if (result)
+			{
+				dialog.dismiss();
+				
+				populateListView();
+				
+				
+				
+				
+			}else
+			{
+				dialog.dismiss();
+				Toast.makeText(getApplicationContext(), "Ocorreu um Erro", Toast.LENGTH_SHORT).show();
+			}
+		}
+
+		@Override
+		protected void onPreExecute() 
+		{
+			dialog = ProgressDialog.show(ServicesActivity.this, "A Carregar Serviços...", "Aguarde...", true);
+		}
+
+		@Override
+		protected void onProgressUpdate(Void... values) 
+		{
+		}
+	}   
+	
+	
 
 }

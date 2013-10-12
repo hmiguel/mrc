@@ -24,19 +24,22 @@ public final class R {
         public static final int bgd=0x7f020000;
         public static final int bgd_top=0x7f020001;
         public static final int ic_launcher=0x7f020002;
+        public static final int map=0x7f020003;
+        public static final int map64=0x7f020004;
     }
     public static final class id {
-        public static final int action_settings=0x7f08000a;
-        public static final int email_login=0x7f080004;
-        public static final int enter=0x7f080006;
-        public static final int linear_layout=0x7f080008;
-        public static final int linear_layout_locals=0x7f080002;
-        public static final int new_service=0x7f080000;
-        public static final int psw_login=0x7f080005;
-        public static final int textView1=0x7f080007;
-        public static final int textView2=0x7f080001;
-        public static final int tolocals=0x7f080009;
-        public static final int totickets=0x7f080003;
+        public static final int Homelist=0x7f080002;
+        public static final int Locallist=0x7f080004;
+        public static final int Loginlist=0x7f080008;
+        public static final int Servicelist=0x7f08000a;
+        public static final int action_settings=0x7f08000b;
+        public static final int email_login=0x7f080006;
+        public static final int linear_layout_home=0x7f080001;
+        public static final int linear_layout_locals=0x7f080003;
+        public static final int mapserv=0x7f080005;
+        public static final int psw_login=0x7f080007;
+        public static final int textView1=0x7f080009;
+        public static final int textView2=0x7f080000;
     }
     public static final class layout {
         public static final int activity_home=0x7f030000;
@@ -45,6 +48,7 @@ public final class R {
         public static final int activity_main=0x7f030003;
         public static final int activity_services=0x7f030004;
         public static final int activity_tickets=0x7f030005;
+        public static final int login_list=0x7f030006;
     }
     public static final class menu {
         public static final int home=0x7f070000;

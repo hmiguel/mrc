@@ -1,14 +1,20 @@
 package pt.uc.dei.mrc.uctickets.ui;
 
+
+import pt.uc.dei.mrc.uctickets.apiclient.Job;
+import pt.uc.dei.mrc.uctickets.models.Login;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Intent;
+import android.graphics.Color;
+import android.util.Log;
 import android.view.Menu;
-import android.view.View;
-import android.widget.Button;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.EditText;
+import android.widget.ListView;
 import android.widget.Toast;
 
 public class LoginActivity extends Activity {
@@ -19,17 +25,28 @@ public class LoginActivity extends Activity {
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
+		
 		setContentView(R.layout.activity_login);
 		
+		String loginlist[] = {"Entrar"}; //opcoes menu login
 		
-		Button btLogin = (Button)findViewById(R.id.enter);
+		ListView list = (ListView) findViewById(R.id.Loginlist);
+		
+		ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, R.layout.login_list, loginlist);
+        
+		list.setAdapter(adapter);
+		
+		list.setBackgroundColor(Color.rgb(0, 201, 234));
+		
+		list.setOnItemClickListener(new AdapterView.OnItemClickListener() {
 
-		btLogin.setOnClickListener(new View.OnClickListener() 
-		{ 
-			public void onClick(View v)
-			{
-				new LoginTask().execute();
-			}
+		    @Override
+		    public void onItemClick(AdapterView<?> parent, android.view.View view, int position, long id) {
+		    	
+		    	//Verify Login
+		    	new LoginTask().execute();
+		    	
+		    }
 		});
 		
 	}
@@ -42,7 +59,6 @@ public class LoginActivity extends Activity {
 	}
 	
 	
-	
 	/**
 	 * Represents an asynchronous login/registration task used to authenticate the user.
 	 */
@@ -52,9 +68,15 @@ public class LoginActivity extends Activity {
 		{
 			EditText email = (EditText)findViewById(R.id.email_login);
 			EditText password = (EditText)findViewById(R.id.psw_login);
-
+			
 			//busca token no servidor
-			//....
+			Log.w("UCFRONTDESK", "EMAIL: " + email.getText().toString());
+			
+			//Login l = Job.LoginKey(email.getText().toString(), password.getText().toString());
+			
+			//String key = l.getKey();
+			
+			//Log.w("UCFRONTDESK", "KEY: " + key);
 			
 			String token = "abc";
 			

@@ -1,0 +1,303 @@
+#
+# A fatal error has been detected by the Java Runtime Environment:
+#
+#  Internal Error (javaClasses.cpp:129), pid=7722, tid=3078892400
+#  fatal error: Invalid layout of preloaded class
+#
+# JRE version: 7.0_21-b11
+# Java VM: Java HotSpot(TM) Client VM (23.21-b01 mixed mode linux-x86 )
+# Failed to write core dump. Core dumps have been disabled. To enable core dumping, try "ulimit -c unlimited" before starting Java again
+#
+# If you would like to submit a bug report, please visit:
+#   http://bugreport.sun.com/bugreport/crash.jsp
+#
+
+---------------  T H R E A D  ---------------
+
+Current thread (0x09fdf000):  JavaThread "Unknown thread" [_thread_in_vm, id=7726, stack(0xb77f2000,0xb7843000)]
+
+Stack: [0xb77f2000,0xb7843000],  sp=0xb7841dc0,  free space=319k
+Native frames: (J=compiled Java code, j=interpreted, Vv=VM code, C=native code)
+V  [libjvm.so+0x4920d9]  VMError::report_and_die()+0x199
+V  [libjvm.so+0x1c51fc]  report_fatal(char const*, int, char const*)+0x4c
+V  [libjvm.so+0x2825b0]  compute_offset(int&, klassOopDesc*, Symbol*, Symbol*, bool)+0x110
+V  [libjvm.so+0x286b44]  java_lang_String::compute_offsets()+0x44
+V  [libjvm.so+0x435805]  SystemDictionary::initialize_preloaded_classes(Thread*)+0x225
+V  [libjvm.so+0x473458]  Universe::genesis(Thread*)+0x3f8
+V  [libjvm.so+0x4738cf]  universe2_init()+0x1f
+V  [libjvm.so+0x2486e0]  init_globals()+0xa0
+V  [libjvm.so+0x464c29]  Threads::create_vm(JavaVMInitArgs*, bool*)+0x1f9
+V  [libjvm.so+0x29012c]  JNI_CreateJavaVM+0x5c
+C  [libjli.so+0x2668]  JavaMain+0x98
+C  [libpthread.so.0+0x5cc9]  start_thread+0xd9
+
+
+---------------  P R O C E S S  ---------------
+
+Java Threads: ( => current thread )
+
+Other Threads:
+
+=>0x09fdf000 (exited) JavaThread "Unknown thread" [_thread_in_vm, id=7726, stack(0xb77f2000,0xb7843000)]
+
+VM state:not at safepoint (not fully initialized)
+
+VM Mutex/Monitor currently owned by a thread: None
+
+GC Heap History (0 events):
+No events
+
+Deoptimization events (0 events):
+No events
+
+Internal exceptions (0 events):
+No events
+
+Events (10 events):
+Event: 0.017 loading class 0x0a006a20 done
+Event: 0.018 loading class 0x0a006360 done
+Event: 0.018 loading class 0x0a006338
+Event: 0.018 loading class 0x0a026210
+Event: 0.018 loading class 0x0a026210 done
+Event: 0.018 loading class 0x0a026248
+Event: 0.019 loading class 0x0a026248 done
+Event: 0.019 loading class 0x0a026280
+Event: 0.019 loading class 0x0a026280 done
+Event: 0.019 loading class 0x0a006338 done
+
+
+Dynamic libraries:
+00110000-00112000 r-xp 00000000 08:01 358404     /lib/libdl-2.12.1.so
+00112000-00113000 r--p 00001000 08:01 358404     /lib/libdl-2.12.1.so
+00113000-00114000 rw-p 00002000 08:01 358404     /lib/libdl-2.12.1.so
+00114000-0011b000 r-xp 00000000 08:01 358406     /lib/librt-2.12.1.so
+0011b000-0011c000 r--p 00006000 08:01 358406     /lib/librt-2.12.1.so
+0011c000-0011d000 rw-p 00007000 08:01 358406     /lib/librt-2.12.1.so
+0011d000-00128000 r-xp 00000000 08:01 247437     /usr/local/java/jdk1.7.0_21/jre/lib/i386/libverify.so
+00128000-00129000 rw-p 0000b000 08:01 247437     /usr/local/java/jdk1.7.0_21/jre/lib/i386/libverify.so
+00129000-00132000 r-xp 00000000 08:01 358408     /lib/libnss_nis-2.12.1.so
+00132000-00133000 r--p 00008000 08:01 358408     /lib/libnss_nis-2.12.1.so
+00133000-00134000 rw-p 00009000 08:01 358408     /lib/libnss_nis-2.12.1.so
+00134000-0014b000 r-xp 00000000 08:01 247483     /usr/local/java/jdk1.7.0_21/jre/lib/i386/libzip.so
+0014b000-0014c000 rw-p 00017000 08:01 247483     /usr/local/java/jdk1.7.0_21/jre/lib/i386/libzip.so
+002bf000-00416000 r-xp 00000000 08:01 358415     /lib/libc-2.12.1.so
+00416000-00418000 r--p 00157000 08:01 358415     /lib/libc-2.12.1.so
+00418000-00419000 rw-p 00159000 08:01 358415     /lib/libc-2.12.1.so
+00419000-0041c000 rw-p 00000000 00:00 0 
+00652000-00665000 r-xp 00000000 08:01 358410     /lib/libnsl-2.12.1.so
+00665000-00666000 r--p 00012000 08:01 358410     /lib/libnsl-2.12.1.so
+00666000-00667000 rw-p 00013000 08:01 358410     /lib/libnsl-2.12.1.so
+00667000-00669000 rw-p 00000000 00:00 0 
+007db000-007ff000 r-xp 00000000 08:01 358413     /lib/libm-2.12.1.so
+007ff000-00800000 r--p 00023000 08:01 358413     /lib/libm-2.12.1.so
+00800000-00801000 rw-p 00024000 08:01 358413     /lib/libm-2.12.1.so
+00866000-0087b000 r-xp 00000000 08:01 358416     /lib/libpthread-2.12.1.so
+0087b000-0087c000 ---p 00015000 08:01 358416     /lib/libpthread-2.12.1.so
+0087c000-0087d000 r--p 00015000 08:01 358416     /lib/libpthread-2.12.1.so
+0087d000-0087e000 rw-p 00016000 08:01 358416     /lib/libpthread-2.12.1.so
+0087e000-00880000 rw-p 00000000 00:00 0 
+00b9a000-00bad000 r-xp 00000000 08:01 293340     /usr/local/java/jdk1.7.0_21/jre/lib/i386/jli/libjli.so
+00bad000-00bae000 rw-p 00012000 08:01 293340     /usr/local/java/jdk1.7.0_21/jre/lib/i386/jli/libjli.so
+00c55000-00c5b000 r-xp 00000000 08:01 358414     /lib/libnss_compat-2.12.1.so
+00c5b000-00c5c000 r--p 00006000 08:01 358414     /lib/libnss_compat-2.12.1.so
+00c5c000-00c5d000 rw-p 00007000 08:01 358414     /lib/libnss_compat-2.12.1.so
+00cb2000-00cbc000 r-xp 00000000 08:01 358402     /lib/libnss_files-2.12.1.so
+00cbc000-00cbd000 r--p 00009000 08:01 358402     /lib/libnss_files-2.12.1.so
+00cbd000-00cbe000 rw-p 0000a000 08:01 358402     /lib/libnss_files-2.12.1.so
+00d7f000-00da2000 r-xp 00000000 08:01 247451     /usr/local/java/jdk1.7.0_21/jre/lib/i386/libjava.so
+00da2000-00da3000 rw-p 00023000 08:01 247451     /usr/local/java/jdk1.7.0_21/jre/lib/i386/libjava.so
+00db2000-00dce000 r-xp 00000000 08:01 358399     /lib/ld-2.12.1.so
+00dce000-00dcf000 r--p 0001b000 08:01 358399     /lib/ld-2.12.1.so
+00dcf000-00dd0000 rw-p 0001c000 08:01 358399     /lib/ld-2.12.1.so
+00ef6000-00ef7000 r-xp 00000000 00:00 0          [vdso]
+00ef7000-0140d000 r-xp 00000000 08:01 2265251    /usr/local/java/jdk1.7.0_21/jre/lib/i386/client/libjvm.so
+0140d000-0142a000 rw-p 00515000 08:01 2265251    /usr/local/java/jdk1.7.0_21/jre/lib/i386/client/libjvm.so
+0142a000-01849000 rw-p 00000000 00:00 0 
+08048000-08049000 r-xp 00000000 08:01 522745     /usr/local/java/jdk1.7.0_21/bin/java
+08049000-0804a000 rw-p 00000000 08:01 522745     /usr/local/java/jdk1.7.0_21/bin/java
+09fd8000-0a03b000 rw-p 00000000 00:00 0          [heap]
+a1440000-a1592000 rw-p 00000000 00:00 0 
+a1592000-a1658000 r--s 0116f000 08:01 295887     /home/hmiguel/android-sdks/platforms/android-17/android.jar
+a1658000-a165f000 rw-p 00000000 00:00 0 
+a165f000-a1679000 rw-p 00000000 00:00 0 
+a1679000-a167f000 rw-p 00000000 00:00 0 
+a167f000-a16cf000 rw-p 00000000 00:00 0 
+a16cf000-a16d2000 rw-p 00000000 00:00 0 
+a16d2000-a16f9000 rw-p 00000000 00:00 0 
+a16f9000-a16ff000 rw-p 00000000 00:00 0 
+a16ff000-a174f000 rw-p 00000000 00:00 0 
+a174f000-a1755000 rw-p 00000000 00:00 0 
+a1755000-a176f000 rw-p 00000000 00:00 0 
+a176f000-a1cc0000 rw-p 00000000 00:00 0 
+a1cc0000-a6cc0000 rw-p 00000000 00:00 0 
+a6cc0000-a7770000 rw-p 00000000 00:00 0 
+a7770000-b1770000 rw-p 00000000 00:00 0 
+b1770000-b2370000 rw-p 00000000 00:00 0 
+b2370000-b5770000 rw-p 00000000 00:00 0 
+b5772000-b5773000 rw-p 00000000 00:00 0 
+b5773000-b57f2000 rw-p 00000000 00:00 0 
+b57f2000-b5822000 rwxp 00000000 00:00 0 
+b5822000-b77f2000 rw-p 00000000 00:00 0 
+b77f2000-b77f5000 ---p 00000000 00:00 0 
+b77f5000-b7845000 rw-p 00000000 00:00 0 
+b7853000-b785b000 rw-s 00000000 08:01 863994     /tmp/hsperfdata_hmiguel/7722
+b785b000-b785c000 rw-p 00000000 00:00 0 
+b785c000-b785d000 r--p 00000000 00:00 0 
+b785d000-b785f000 rw-p 00000000 00:00 0 
+bfc61000-bfc82000 rw-p 00000000 00:00 0          [stack]
+
+VM Arguments:
+jvm_args: -Dfile.encoding=UTF-8 -Xbootclasspath:/home/hmiguel/android-sdks/platforms/android-17/android.jar 
+java_command: pt.uc.dei.mrc.uctickets.apiclient.Testing
+Launcher Type: SUN_STANDARD
+
+Environment Variables:
+JAVA_HOME=/usr/local/java/jdk1.7.0_21
+PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/java/jdk1.7.0_21/bin:/u01/app/oracle/product/11.2.0/dbhome_1/bin
+USERNAME=hmiguel
+LD_LIBRARY_PATH=/usr/local/java/jdk1.7.0_21/jre/lib/i386/client:/usr/local/java/jdk1.7.0_21/jre/lib/i386:
+SHELL=/bin/bash
+DISPLAY=:0.0
+
+Signal Handlers:
+SIGSEGV: [libjvm.so+0x492c20], sa_mask[0]=0x7ffbfeff, sa_flags=0x10000004
+SIGBUS: [libjvm.so+0x492c20], sa_mask[0]=0x7ffbfeff, sa_flags=0x10000004
+SIGFPE: [libjvm.so+0x3a6720], sa_mask[0]=0x7ffbfeff, sa_flags=0x10000004
+SIGPIPE: [libjvm.so+0x3a6720], sa_mask[0]=0x7ffbfeff, sa_flags=0x10000004
+SIGXFSZ: [libjvm.so+0x3a6720], sa_mask[0]=0x7ffbfeff, sa_flags=0x10000004
+SIGILL: [libjvm.so+0x3a6720], sa_mask[0]=0x7ffbfeff, sa_flags=0x10000004
+SIGUSR1: SIG_DFL, sa_mask[0]=0x00000000, sa_flags=0x00000000
+SIGUSR2: [libjvm.so+0x3a6000], sa_mask[0]=0x00000004, sa_flags=0x10000004
+SIGHUP: SIG_DFL, sa_mask[0]=0x00000000, sa_flags=0x00000000
+SIGINT: SIG_IGN, sa_mask[0]=0x00000000, sa_flags=0x00000000
+SIGTERM: SIG_DFL, sa_mask[0]=0x00000000, sa_flags=0x00000000
+SIGQUIT: SIG_DFL, sa_mask[0]=0x00000000, sa_flags=0x00000000
+
+
+---------------  S Y S T E M  ---------------
+
+OS:squeeze/sid
+
+uname:Linux 2.6.35-22-generic #33-Ubuntu SMP Sun Sep 19 20:34:50 UTC 2010 i686
+libc:glibc 2.12.1 NPTL 2.12.1 
+rlimit: STACK 8192k, CORE 0k, NPROC infinity, NOFILE 1024, AS infinity
+load average:1.46 1.64 1.36
+
+/proc/meminfo:
+MemTotal:        1799644 kB
+MemFree:           46224 kB
+Buffers:            2616 kB
+Cached:           329536 kB
+SwapCached:         6108 kB
+Active:           830724 kB
+Inactive:         861572 kB
+Active(anon):     691604 kB
+Inactive(anon):   707896 kB
+Active(file):     139120 kB
+Inactive(file):   153676 kB
+Unevictable:          16 kB
+Mlocked:              16 kB
+HighTotal:        923208 kB
+HighFree:           1392 kB
+LowTotal:         876436 kB
+LowFree:           44832 kB
+SwapTotal:        979928 kB
+SwapFree:         773380 kB
+Dirty:               308 kB
+Writeback:             0 kB
+AnonPages:       1354860 kB
+Mapped:           122124 kB
+Shmem:             39356 kB
+Slab:              28044 kB
+SReclaimable:      14728 kB
+SUnreclaim:        13316 kB
+KernelStack:        4200 kB
+PageTables:        11444 kB
+NFS_Unstable:          0 kB
+Bounce:                0 kB
+WritebackTmp:          0 kB
+CommitLimit:     1879748 kB
+Committed_AS:    4925548 kB
+VmallocTotal:     122880 kB
+VmallocUsed:       15040 kB
+VmallocChunk:     101504 kB
+HardwareCorrupted:     0 kB
+HugePages_Total:       0
+HugePages_Free:        0
+HugePages_Rsvd:        0
+HugePages_Surp:        0
+Hugepagesize:       4096 kB
+DirectMap4k:       16376 kB
+DirectMap4M:      892928 kB
+
+
+CPU:total 2 (2 cores per cpu, 1 threads per core) family 6 model 15 stepping 13, cmov, cx8, fxsr, mmx, sse, sse2, sse3, ssse3, tsc
+
+/proc/cpuinfo:
+processor	: 0
+vendor_id	: GenuineIntel
+cpu family	: 6
+model		: 15
+model name	: Intel(R) Pentium(R) Dual  CPU  T2410  @ 2.00GHz
+stepping	: 13
+cpu MHz		: 1600.000
+cache size	: 1024 KB
+physical id	: 0
+siblings	: 2
+core id		: 0
+cpu cores	: 2
+apicid		: 0
+initial apicid	: 0
+fdiv_bug	: no
+hlt_bug		: no
+f00f_bug	: no
+coma_bug	: no
+fpu		: yes
+fpu_exception	: yes
+cpuid level	: 10
+wp		: yes
+flags		: fpu vme de pse tsc msr pae mce cx8 apic mtrr pge mca cmov pat pse36 clflush dts acpi mmx fxsr sse sse2 ss ht tm pbe nx lm constant_tsc arch_perfmon pebs bts aperfmperf pni dtes64 monitor ds_cpl est tm2 ssse3 cx16 xtpr pdcm lahf_lm
+bogomips	: 3999.79
+clflush size	: 64
+cache_alignment	: 64
+address sizes	: 36 bits physical, 48 bits virtual
+power management:
+
+processor	: 1
+vendor_id	: GenuineIntel
+cpu family	: 6
+model		: 15
+model name	: Intel(R) Pentium(R) Dual  CPU  T2410  @ 2.00GHz
+stepping	: 13
+cpu MHz		: 1600.000
+cache size	: 1024 KB
+physical id	: 0
+siblings	: 2
+core id		: 1
+cpu cores	: 2
+apicid		: 1
+initial apicid	: 1
+fdiv_bug	: no
+hlt_bug		: no
+f00f_bug	: no
+coma_bug	: no
+fpu		: yes
+fpu_exception	: yes
+cpuid level	: 10
+wp		: yes
+flags		: fpu vme de pse tsc msr pae mce cx8 apic mtrr pge mca cmov pat pse36 clflush dts acpi mmx fxsr sse sse2 ss ht tm pbe nx lm constant_tsc arch_perfmon pebs bts aperfmperf pni dtes64 monitor ds_cpl est tm2 ssse3 cx16 xtpr pdcm lahf_lm
+bogomips	: 4000.13
+clflush size	: 64
+cache_alignment	: 64
+address sizes	: 36 bits physical, 48 bits virtual
+power management:
+
+
+
+Memory: 4k page, physical 1799644k(46224k free), swap 979928k(773380k free)
+
+vm_info: Java HotSpot(TM) Client VM (23.21-b01) for linux-x86 JRE (1.7.0_21-b11), built on Apr  4 2013 04:24:32 by "java_re" with gcc 4.3.0 20080428 (Red Hat 4.3.0-8)
+
+time: Wed Oct  9 19:16:46 2013
+elapsed time: 0 seconds
+

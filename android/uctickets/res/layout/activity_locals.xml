@@ -17,7 +17,7 @@
         android:layout_alignParentTop="true"
         android:layout_marginLeft="20dp"
         android:layout_marginTop="60dp"
-        android:text="Seleccionar Local"
+        android:text="Selecionar Local"
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:textColor="#00C9EA" />
 
@@ -27,19 +27,31 @@
         android:layout_height="wrap_content"
         android:layout_alignLeft="@+id/textView2"
         android:layout_below="@+id/textView2"
-        android:layout_marginTop="17dp"
+        android:layout_marginTop="21dp"
         android:orientation="vertical" >
+
+        <ListView
+            android:id="@+id/Locallist"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginBottom="142dp" 
+            android:textColor="#00C9EA"
+            android:divider="#FFFFFF"
+             android:dividerHeight="1dp"
+            >
+
+        </ListView>
 
     </LinearLayout>
 
-    <Button
-        android:id="@+id/totickets"
+    <ImageView
+        android:id="@+id/mapserv"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginBottom="62dp"
-        android:text="Continuar" />
+        android:layout_alignParentRight="true"
+        android:src="@drawable/map64" />
+    
 
 </RelativeLayout>
     
