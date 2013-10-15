@@ -32,14 +32,26 @@ public final class R {
         public static final int Locallist=0x7f080004;
         public static final int Loginlist=0x7f080008;
         public static final int Servicelist=0x7f08000a;
-        public static final int action_settings=0x7f08000b;
+        public static final int Ticketlist=0x7f080016;
+        public static final int action_settings=0x7f080017;
+        public static final int actual_ticket=0x7f08000f;
+        public static final int current_ticket=0x7f080010;
         public static final int email_login=0x7f080006;
+        public static final int lay_senhas=0x7f08000d;
         public static final int linear_layout_home=0x7f080001;
         public static final int linear_layout_locals=0x7f080003;
+        public static final int main_layout=0x7f08000b;
         public static final int mapserv=0x7f080005;
         public static final int psw_login=0x7f080007;
-        public static final int textView1=0x7f080009;
+        public static final int spacer=0x7f08000e;
         public static final int textView2=0x7f080000;
+        public static final int time_lay=0x7f080013;
+        public static final int time_wait_fixo=0x7f080014;
+        public static final int time_wait_minutes=0x7f080015;
+        public static final int title_tickets=0x7f080009;
+        public static final int titulo=0x7f08000c;
+        public static final int user_ticket=0x7f080012;
+        public static final int user_ticket_text=0x7f080011;
     }
     public static final class layout {
         public static final int activity_home=0x7f030000;

@@ -36,7 +36,8 @@
              android:layout_marginTop="5dp"
             android:ems="30"
             android:hint="ucxxxxxxxxxx@student.uc.pt"
-            android:inputType="textEmailAddress" />
+            android:inputType="textNoSuggestions"  
+            />
 
         <EditText
             android:id="@+id/psw_login"

@@ -3,8 +3,12 @@ package pt.uc.dei.mrc.uctickets.ui;
 
 import java.util.ArrayList;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import pt.uc.dei.mrc.uctickets.apiclient.Job;
 import pt.uc.dei.mrc.uctickets.models.Local;
+import pt.uc.dei.mrc.uctickets.models.Service;
 
 
 import android.os.AsyncTask;
@@ -31,6 +35,8 @@ public class LocalsActivity extends Activity {
 	private ArrayList<Local> locallist;
 	
 	ListView listview;
+	
+	JSONObject ticketobj;
 	 
 	private ProgressDialog dialog;
 	
@@ -39,6 +45,16 @@ public class LocalsActivity extends Activity {
 		super.onCreate(savedInstanceState);
 		
 		setContentView(R.layout.activity_locals);
+		
+		try {
+			Intent intent = getIntent(); //get intent
+			String ticket = intent.getStringExtra("ticket"); //get ticket json string
+			ticketobj = new JSONObject(ticket);
+		} catch (JSONException e) {
+			// TODO Auto-generated catch block
+			//
+		}
+		
 		
 		new LocalsLoadTask().execute();
 		
@@ -70,17 +86,27 @@ public class LocalsActivity extends Activity {
 		    	//Intent to Next Activity
 		    	Intent i = new Intent(LocalsActivity.this, TicketsActivity.class);
 		    	
-		    	//Local l = (Local)parent.getAdapter().getItem(position); // Local Object
+		    	Local l = (Local)parent.getAdapter().getItem(position); // Local Object
 		    	
-		    	//Toast.makeText(getApplicationContext(), ">"+l.getLID(), Toast.LENGTH_SHORT).show();
+		    			    	
+		    	String json; 
 		    	
-		    	//i.putExtra("local", Local l );
+		    	try {
+		    		// update title
+		    		String title = ticketobj.getString("title") + " - " + l.getName();
+		    		ticketobj.put("title", title);  
+		    		
+					ticketobj.accumulate("lid", l.getLID()); // add LID to json object
+					json = ticketobj.toString();
+					i.putExtra("ticket", json );
+					startActivity(i);
+					
+				} catch (JSONException e) {
+					// TODO Auto-generated catch block
+					//e.printStackTrace();
+				}
 		    	
-		    	//Construir Objecto Ticket para enviar
-				
-		    	startActivity(i);
-		    	
-		       // Toast.makeText(getApplicationContext(), ((TextView) view).getText(), Toast.LENGTH_SHORT).show();
+		
 		    }
 		});
 	}

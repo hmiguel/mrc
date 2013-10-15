@@ -1,6 +1,9 @@
 package pt.uc.dei.mrc.uctickets.ui;
 
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import pt.uc.dei.mrc.uctickets.apiclient.Job;
 import pt.uc.dei.mrc.uctickets.models.Login;
 import android.os.AsyncTask;
@@ -69,24 +72,27 @@ public class LoginActivity extends Activity {
 			EditText email = (EditText)findViewById(R.id.email_login);
 			EditText password = (EditText)findViewById(R.id.psw_login);
 			
-			//busca token no servidor
-			Log.w("UCFRONTDESK", "EMAIL: " + email.getText().toString());
+			JSONObject login = new JSONObject();
 			
-			//Login l = Job.LoginKey(email.getText().toString(), password.getText().toString());
-			
-			//String key = l.getKey();
-			
-			//Log.w("UCFRONTDESK", "KEY: " + key);
-			
-			String token = "abc";
-			
-			if (token != null)
-			{
-				return true;
-			}else
-			{
+			try {
+				login.accumulate("email", email.getText().toString());
+				login.accumulate("password", password.getText().toString());
+			} catch (JSONException e) {
+				// TODO Auto-generated catch block
 				return false;
 			}
+			
+			JSONObject l = Job.LoginKey(login.toString());
+					
+			try {
+				String token = l.getString("token");
+				
+				return true;
+			} catch (JSONException e) {
+				// TODO Auto-generated catch block
+				return false;
+			}
+			
 		}
 
 		protected Boolean doInBackground(String... params) 
@@ -118,7 +124,7 @@ public class LoginActivity extends Activity {
 		@Override
 		protected void onPreExecute() 
 		{
-			dialog = ProgressDialog.show(LoginActivity.this, "A efectuar login...", "Aguarde...", true);
+			dialog = ProgressDialog.show(LoginActivity.this, "A Processar...", "Aguarde...", true);
 		}
 
 		@Override

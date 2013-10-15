@@ -2,6 +2,9 @@ package pt.uc.dei.mrc.uctickets.ui;
 
 import java.util.ArrayList;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import pt.uc.dei.mrc.uctickets.apiclient.Job;
 import pt.uc.dei.mrc.uctickets.models.Local;
 import pt.uc.dei.mrc.uctickets.models.Service;
@@ -31,6 +34,8 @@ public class ServicesActivity extends Activity {
 	private ArrayList<Service> servicelist;
 	
 	ListView listview;
+	
+	JSONObject ticketobj;
 	 
 	private ProgressDialog dialog;
 
@@ -38,6 +43,17 @@ public class ServicesActivity extends Activity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_services);
+			
+		try {
+			Intent intent = getIntent(); //get intent
+			String ticket = intent.getStringExtra("ticket"); //get ticket json string
+			ticketobj = new JSONObject(ticket);
+			
+		} catch (JSONException e) {
+			// TODO Auto-generated catch block
+			//
+		}
+		
 		
 		new ServicesLoadTask().execute();
 	
@@ -71,15 +87,29 @@ public class ServicesActivity extends Activity {
 		    	//Intent to Next Activity
 		    	Intent i = new Intent(ServicesActivity.this, LocalsActivity.class);
 		    	
-		    	//Local l = (Local)parent.getAdapter().getItem(position); // Local Object
+		    	Service s = (Service)parent.getAdapter().getItem(position); // Service Object
 		    	
 		    	//Toast.makeText(getApplicationContext(), ">"+l.getLID(), Toast.LENGTH_SHORT).show();
 		    	
-		    	//i.putExtra("local", Local l );
+		    	String json; 
+		    	
+		    	try {
+					ticketobj.accumulate("sid", s.getSID()); // add SID to json object
+					ticketobj.accumulate("title", s.getName()); // add SID to json object
+					
+					json = ticketobj.toString();
+					i.putExtra("ticket", json );
+					startActivity(i);
+					
+				} catch (JSONException e) {
+					// TODO Auto-generated catch block
+					//e.printStackTrace();
+				}
+		    	
 		    	
 		    	//Construir Objecto Ticket para enviar
 				
-		    	startActivity(i);
+		    	
 		    	
 		       // Toast.makeText(getApplicationContext(), ((TextView) view).getText(), Toast.LENGTH_SHORT).show();
 		    }
@@ -96,7 +126,7 @@ public class ServicesActivity extends Activity {
 			try{
 				servicelist = Job.serviceslist();
 				
-				Log.w("UCFRONTDESK", ">>> " + servicelist.get(0).getName() ); 
+				//Log.w("UCFRONTDESK", ">>> " + servicelist.get(0).getName() ); 
 				
 			}catch(Exception e){
 				Toast.makeText(getApplicationContext(), e.toString(), Toast.LENGTH_SHORT).show();

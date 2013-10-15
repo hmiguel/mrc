@@ -1,6 +1,9 @@
 package pt.uc.dei.mrc.uctickets.ui;
 
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import android.os.Bundle;
 import android.app.Activity;
 import android.content.Intent;
@@ -13,11 +16,15 @@ import android.widget.ListView;
 public class HomeActivity extends Activity {
 
 	ListView listview;
+	
+	JSONObject ticketobj;
 	 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_home);
+		
+		ticketobj = new JSONObject(); 
 		
 		String homelist[] = {"Criar Senha", "Gerir Senhas"};
 		
@@ -35,12 +42,26 @@ public class HomeActivity extends Activity {
 		    public void onItemClick(AdapterView<?> parent, android.view.View view, int position, long id) {
 		    	
 		    	Intent i;
-		    	
+		    			    	
 		    	if(position == 0){
 		    		
+		    		String json; 
 		    		i = new Intent(HomeActivity.this, ServicesActivity.class);
-		    		startActivity(i);
-		    		
+			    	
+			    	try {
+						ticketobj.accumulate("uid", 1); // add UID
+						ticketobj.accumulate("active", 1); // add ACTIVE
+						json = ticketobj.toString();
+						i.putExtra("ticket", json );
+						
+						startActivity(i);
+			    	} catch (JSONException e) {
+						// TODO Auto-generated catch block
+						//
+					}
+			    	
+			    	
+			    	
 		    	}else if(position == 1){
 		    		
 		    		i = new Intent(HomeActivity.this, ServicesActivity.class);

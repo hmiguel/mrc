@@ -10,7 +10,7 @@
     tools:context=".ServicesActivity" >
 
     <TextView
-        android:id="@+id/textView1"
+        android:id="@+id/title_tickets"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
@@ -24,8 +24,8 @@
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/textView1"
-        android:layout_below="@+id/textView1"
+        android:layout_alignLeft="@+id/title_tickets"
+        android:layout_below="@+id/title_tickets"
         android:layout_marginTop="21dp"
         android:orientation="vertical" >
 

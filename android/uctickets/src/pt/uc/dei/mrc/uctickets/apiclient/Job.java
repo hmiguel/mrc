@@ -13,29 +13,27 @@ import pt.uc.dei.mrc.uctickets.models.Service;
 import pt.uc.dei.mrc.uctickets.models.Local;
 import pt.uc.dei.mrc.uctickets.models.Login;
 
+
+/*
+ * Job contém metodos para chamar API da UCFRONTDESK
+ *  
+ */
 public class Job {
 	
 	
-	public static Login LoginKey(String username, String password){
+	public static JSONObject loadTicket(String data){
 		
-		String data = "{\"username\":" + username + ",\"password\":" + password + "\"}";
+		JSONObject ticket = ServerAPI.post("ticket/current", data);
 		
+		return ticket;
+	}
+	
+	
+	public static JSONObject LoginKey(String data){
+				
 		JSONObject login = ServerAPI.post("login", data);
 		
-		Login l = new Login();
-		
-		try {
-			
-			l.setKey(login.getString("key"));
-		
-			
-			
-		} catch (JSONException e) {
-			Log.w("UCFRONTDESK", e.toString());
-			return null;
-		}
-		
-		return l;
+		return login;
 		
 	}
 	
