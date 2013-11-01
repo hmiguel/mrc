@@ -9,5 +9,8 @@
     <string name="title_activity_services">ServicesActivity</string>
     <string name="title_activity_locals">LocalsActivity</string>
     <string name="title_activity_tickets">TicketsActivity</string>
+    <string name="title_activity_as">AsActivity</string>
+    <string name="title_activity_maps">MapsActivity</string>
+    <string name="title_activity_maps_directions">MapsDirectionsActivity</string>
 
 </resources>

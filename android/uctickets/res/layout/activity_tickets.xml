@@ -24,8 +24,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center_horizontal"
-              android:layout_marginTop="10dp"
-            android:text="Tesouraria - Pólo I"
+            android:layout_marginTop="10dp"
+            android:text=" "
             android:textAppearance="?android:attr/textAppearanceLarge"
             android:textColor="#00C9EA" />
 
@@ -47,18 +47,15 @@
 		        android:text=""
 		        android:textColor="#000000"
 		        android:textSize="1sp" />
-		
-              <TextView
-		        android:id="@+id/actual_ticket"
-		        android:layout_width="96dp"
-		         android:gravity="center"
-		        android:layout_weight="1"
-		          android:layout_marginTop="10dp"
-		        android:layout_height="wrap_content"
-		        android:text="Senha Actual"
-		         android:textColor="#00C9EA"
-		        android:layout_gravity="center"
-		 	  />
+
+             <TextView
+                 android:id="@+id/current_ticket_text"
+                 android:layout_width="wrap_content"
+                 android:layout_height="wrap_content"
+                 android:text="Senha Actual"
+                 android:layout_gravity="center"
+                 android:textColor="#00C9EA"
+                 android:textAppearance="?android:attr/textAppearanceMedium" />
               
 		    <TextView
 		        android:id="@+id/current_ticket"
@@ -83,16 +80,13 @@
 		    
 		    
 		    <TextView
-		        android:id="@+id/user_ticket_text"
-		        android:layout_width="96dp"
-		        android:gravity="center"
-		        android:layout_weight="1"
-		        android:layout_height="wrap_content"
-		        android:layout_marginTop="10dp"
-		        android:text="Sua Senha"
-		        android:textColor="#00C9EA"
-		        android:layout_gravity="center" 
-		        />
+                 android:id="@+id/user_ticket_text"
+                 android:layout_width="wrap_content"
+                 android:layout_height="wrap_content"
+                 android:text="Sua Senha"
+                 android:layout_gravity="center"
+                 android:textColor="#00C9EA"
+                 android:textAppearance="?android:attr/textAppearanceMedium" />
 		
 		    <TextView
 		        android:id="@+id/user_ticket"
@@ -139,17 +133,44 @@
 		            android:textColor="#00C9EA"
 		            android:layout_gravity="right" 
 		            android:textSize="14sp" />
+		     </LinearLayout>
+		     
+		     <LinearLayout
+		        android:id="@+id/wait_lay"
+		        android:layout_width="match_parent"
+		        android:layout_height="wrap_content"
+		        android:layout_marginTop="5dp"
+		        android:orientation="horizontal" >
+		         <TextView
+		            android:id="@+id/waiting_fixo"
+		            android:layout_width="wrap_content"
+		            android:layout_height="wrap_content"
+		            android:text="À sua frente: "
+		            android:textColor="#00C9EA"
+		               android:layout_gravity="left" 
+		            android:textSize="14sp" />
+
+		        <TextView
+		            android:id="@+id/waiting_tickets"
+		            android:layout_width="wrap_content"
+		            android:layout_height="wrap_content"
+		            android:layout_gravity="right"
+		            android:text="0"
+		            android:textColor="#00C9EA"
+		            android:textSize="14sp" />
 
 		    </LinearLayout>
 		    
 		     <ListView
 	            android:id="@+id/Ticketlist"
-	             android:layout_marginTop="10dp"
+	             android:layout_marginTop="5dp"
+	              android:layout_marginBottom="5dp"
 	            android:layout_width="match_parent"
 	            android:layout_height="wrap_content"
+	            android:divider="#00C9EA"
 	            >
 
-      		  </ListView>
+      		 </ListView>
 		
 		</LinearLayout>
 

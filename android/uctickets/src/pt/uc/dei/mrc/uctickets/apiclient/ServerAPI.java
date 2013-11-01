@@ -24,6 +24,9 @@ import android.util.Log;
 
 public class ServerAPI {
 
+	private static String path = "http://mrcserver.herokuapp.com/api/";
+	
+	//private static String path = "http://0.0.0.0:5000/api/";
 	
 	private static JSONObject toJSONObject(String jsonString)
 	{
@@ -42,15 +45,15 @@ public class ServerAPI {
 	
 	//GET - funcao generica para GETS
 	
-	public static JSONObject get(String call)
+	public static JSONObject get(String call) throws JSONException
 	{
 		//SharedPreferences prefs = UCFrontDesk.getAppContext().getSharedPreferences("frontdesk", Context.MODE_PRIVATE);
 		//String token = prefs.getString("frontdesk.token", "");
-
+		
 		
 		String token = "abc";
 		
-		String url = "http://mrcserver.herokuapp.com/api/" + call;
+		String url = path + call;
 
 		HttpResponse response = null;
 
@@ -108,8 +111,10 @@ public class ServerAPI {
 		}catch (IOException e){
 			Log.w("UCFRONTDESK", "Communication error "+ e);
 		}
+			
+		Log.w("UCFRONTDESK", "Json String Response: " + json.toString());
 				
-		return toJSONObject(json.toString());
+		return new JSONObject(json.toString());
 		
 	}
 	
@@ -117,7 +122,7 @@ public class ServerAPI {
 	{
 		Log.w("UCFRONTDESK", "DATA: " + data);
 		
-		String url = "http://mrcserver.herokuapp.com/api/" + call;
+		String url = path + call;
 
 		HttpPost post = new HttpPost(url);
 		

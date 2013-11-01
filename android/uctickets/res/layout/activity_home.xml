@@ -8,40 +8,55 @@
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context=".HomeActivity" >
-    
-    
-    
-     <TextView
-        android:id="@+id/textView2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentTop="true"
-        android:layout_marginLeft="20dp"
-        android:layout_marginTop="60dp"
-        android:text="Selecionar Opção"
-        android:textAppearance="?android:attr/textAppearanceLarge"
-        android:textColor="#00C9EA" />
 
-    <LinearLayout
-        android:id="@+id/linear_layout_home"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/textView2"
-        android:layout_below="@+id/textView2"
-        android:layout_marginTop="21dp"
-        android:orientation="vertical" >
+     <LinearLayout
+         android:id="@+id/linear_layout_home"
+         android:layout_width="wrap_content"
+         android:layout_height="wrap_content"
+         android:layout_marginTop="21dp"
+         android:orientation="vertical" >
 
-        <ListView
-            android:id="@+id/Homelist"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_marginBottom="142dp" 
-            android:textColor="#00C9EA"
-            android:divider="#FFFFFF"
-            android:dividerHeight="1dp"
-            >
+         <TextView
+             android:id="@+id/textView2"
+             android:layout_width="wrap_content"
+             android:layout_height="wrap_content"
+             android:layout_marginLeft="20dp"
+             android:layout_marginTop="60dp"
+             android:text="Selecionar Opção"
+             android:textAppearance="?android:attr/textAppearanceLarge"
+             android:textColor="#00C9EA" />
 
-        </ListView>
-	</LinearLayout>
+         <ListView
+             android:id="@+id/Homelist"
+             android:layout_width="match_parent"
+             android:layout_height="match_parent"
+             android:layout_marginTop="10dp"
+             android:layout_marginLeft="20dp"
+             android:textColor="#00C9EA" >
+         </ListView>
+
+         <TextView
+             android:id="@+id/textView1"
+             android:layout_width="wrap_content"
+             android:layout_height="wrap_content"
+             android:layout_marginLeft="20dp"
+             android:layout_marginTop="10dp"
+             android:layout_above="@id/Homelist"
+             android:text="Senhas Activas" 
+             android:textAppearance="?android:attr/textAppearanceLarge"
+             android:textColor="#00C9EA" />
+             
+         <ListView
+             android:id="@+id/Ticketlistview"
+             android:layout_width="wrap_content"
+             android:layout_height="wrap_content"
+             android:layout_marginTop="10dp"
+             android:layout_marginLeft="20dp"
+             android:layout_marginBottom="10dp"
+             android:divider="#FFFFFF"
+             android:dividerHeight="1dp"
+             android:textColor="#00C9EA" 
+             >
+         </ListView>
+     </LinearLayout>
 </RelativeLayout>

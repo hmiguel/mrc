@@ -1,13 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    
     package="pt.uc.dei.mrc.uctickets.ui"
+    android:label="UC FrontDesk"
     android:versionCode="1"
     android:versionName="1.0" >
 
     <uses-sdk
         android:minSdkVersion="8"
         android:targetSdkVersion="17" />
+
     <uses-permission android:name="android.permission.INTERNET" />
 
     <application
@@ -15,10 +16,15 @@
         android:icon="@drawable/ic_launcher"
         android:label="@string/app_name"
         android:theme="@style/AppTheme" >
+        <service
+            android:name="pt.uc.dei.mrc.uctickets.service.ServiceMain"
+            android:enabled="true" >
+        </service>
+
         <activity
             android:name="pt.uc.dei.mrc.uctickets.ui.MainActivity"
-             android:theme="@android:style/Theme.Black.NoTitleBar.Fullscreen"
-            android:label="@string/app_name" >
+            android:label="@string/app_name"
+            android:theme="@android:style/Theme.Black.NoTitleBar.Fullscreen" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -27,28 +33,39 @@
         </activity>
         <activity
             android:name="pt.uc.dei.mrc.uctickets.ui.LoginActivity"
-            android:theme="@android:style/Theme.Black.NoTitleBar.Fullscreen"
-            android:label="@string/title_activity_login" >
+            android:label="@string/title_activity_login"
+            android:theme="@android:style/Theme.Black.NoTitleBar.Fullscreen" >
         </activity>
         <activity
             android:name="pt.uc.dei.mrc.uctickets.ui.HomeActivity"
-            android:theme="@android:style/Theme.Black.NoTitleBar.Fullscreen"
-            android:label="@string/title_activity_home" >
+            android:label="@string/title_activity_home"
+            android:theme="@android:style/Theme.Black.NoTitleBar.Fullscreen" >
         </activity>
         <activity
             android:name="pt.uc.dei.mrc.uctickets.ui.ServicesActivity"
-            android:theme="@android:style/Theme.Black.NoTitleBar.Fullscreen"
-            android:label="@string/title_activity_services" >
+            android:label="@string/title_activity_services"
+            android:theme="@android:style/Theme.Black.NoTitleBar.Fullscreen" >
         </activity>
         <activity
             android:name="pt.uc.dei.mrc.uctickets.ui.LocalsActivity"
-            android:theme="@android:style/Theme.Black.NoTitleBar.Fullscreen"
-            android:label="@string/title_activity_locals" >
+            android:label="@string/title_activity_locals"
+            android:theme="@android:style/Theme.Black.NoTitleBar.Fullscreen" >
         </activity>
         <activity
             android:name="pt.uc.dei.mrc.uctickets.ui.TicketsActivity"
-            android:theme="@android:style/Theme.Black.NoTitleBar.Fullscreen"
-            android:label="@string/title_activity_tickets" >
+            android:label="@string/title_activity_tickets"
+            android:theme="@android:style/Theme.Black.NoTitleBar.Fullscreen" >
+        </activity>
+      
+        <activity
+            android:name="pt.uc.dei.mrc.uctickets.ui.MapsActivity"
+            android:label="@string/title_activity_maps" 
+            android:theme="@android:style/Theme.Black.NoTitleBar.Fullscreen" >
+        </activity>
+        <activity
+            android:name="pt.uc.dei.mrc.uctickets.ui.MapsDirectionsActivity"
+            android:label="@string/title_activity_maps_directions" 
+            android:theme="@android:style/Theme.Black.NoTitleBar.Fullscreen" >
         </activity>
     </application>
 

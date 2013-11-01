@@ -19,9 +19,11 @@ import android.graphics.Color;
 import android.util.Log;
 import android.view.Menu;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.RadioButton;
@@ -54,11 +56,8 @@ public class ServicesActivity extends Activity {
 			//
 		}
 		
-		
+				
 		new ServicesLoadTask().execute();
-	
-	
-		
 	}
 
 
@@ -78,6 +77,7 @@ public class ServicesActivity extends Activity {
 		list.setAdapter(adapter);
 
 		list.setBackgroundColor(Color.rgb(0, 201, 234));
+	
 		
 		list.setOnItemClickListener(new AdapterView.OnItemClickListener() {
 
@@ -88,14 +88,12 @@ public class ServicesActivity extends Activity {
 		    	Intent i = new Intent(ServicesActivity.this, LocalsActivity.class);
 		    	
 		    	Service s = (Service)parent.getAdapter().getItem(position); // Service Object
-		    	
-		    	//Toast.makeText(getApplicationContext(), ">"+l.getLID(), Toast.LENGTH_SHORT).show();
-		    	
+		    			    	
 		    	String json; 
 		    	
 		    	try {
-					ticketobj.accumulate("sid", s.getSID()); // add SID to json object
-					ticketobj.accumulate("title", s.getName()); // add SID to json object
+					ticketobj.put("sid", s.getSID()); // add SID to json object
+					ticketobj.put("title", s.getName()); // add SID to json object
 					
 					json = ticketobj.toString();
 					i.putExtra("ticket", json );
@@ -106,12 +104,14 @@ public class ServicesActivity extends Activity {
 					//e.printStackTrace();
 				}
 		    	
-		    	
-		    	//Construir Objecto Ticket para enviar
-				
-		    	
-		    	
-		       // Toast.makeText(getApplicationContext(), ((TextView) view).getText(), Toast.LENGTH_SHORT).show();
+		    }
+		});
+		
+		// MAPA
+		ImageView img = (ImageView) findViewById(R.id.mapserv);
+		img.setOnClickListener(new OnClickListener() {
+			public void onClick(View v) {
+				new MapsLoadTask().execute();
 		    }
 		});
 	}
@@ -129,7 +129,7 @@ public class ServicesActivity extends Activity {
 				//Log.w("UCFRONTDESK", ">>> " + servicelist.get(0).getName() ); 
 				
 			}catch(Exception e){
-				Toast.makeText(getApplicationContext(), e.toString(), Toast.LENGTH_SHORT).show();
+				//Toast.makeText(getApplicationContext(), e.toString(), Toast.LENGTH_SHORT).show();
 			}
 			
 			if (servicelist == null){	
@@ -178,6 +178,80 @@ public class ServicesActivity extends Activity {
 		protected void onPreExecute() 
 		{
 			dialog = ProgressDialog.show(ServicesActivity.this, "A Carregar Serviços...", "Aguarde...", true);
+		}
+
+		@Override
+		protected void onProgressUpdate(Void... values) 
+		{
+		}
+	}   
+	
+	/**
+	 * Represents an asynchronous local task used to get locals
+	 */
+	private class MapsLoadTask extends AsyncTask<String, Void, Boolean> 
+	{
+		private JSONObject desks = null;
+		
+		protected boolean loadMaps()
+		{
+			try{
+				desks = Job.desks();
+				
+			}catch(Exception e){
+				
+			}
+			
+			if (desks == null){	
+				
+				return false;
+			}
+			
+			return true;
+			
+		}
+
+		protected Boolean doInBackground(String... params) 
+		{
+			if (loadMaps())
+			{
+				
+				
+				return true;
+			}
+			else
+			{
+				return false;
+			}
+		}      
+
+		@Override
+		protected void onPostExecute(Boolean result) 
+		{
+			if (result)
+			{
+				dialog.dismiss();
+				
+				Intent i = new Intent(ServicesActivity.this, MapsActivity.class);
+				
+				i.putExtra("desks", desks.toString());
+				//Async Task
+				
+				startActivity(i);
+				
+				
+				
+			}else
+			{
+				dialog.dismiss();
+				Toast.makeText(getApplicationContext(), "Ocorreu um Erro", Toast.LENGTH_SHORT).show();
+			}
+		}
+
+		@Override
+		protected void onPreExecute() 
+		{
+			dialog = ProgressDialog.show(ServicesActivity.this, "A Carregar Mapas...", "Aguarde...", true);
 		}
 
 		@Override

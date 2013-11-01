@@ -24,8 +24,11 @@ public class TicketsActivity extends Activity {
 	
 	JSONObject ticketobj;
 	JSONObject init;
-	
+	JSONObject gt;
 	boolean job;
+	
+	ListView list;
+	String scene;
 	
 	private ProgressDialog dialog;
 
@@ -53,32 +56,28 @@ public class TicketsActivity extends Activity {
 			// TODO Auto-generated catch block
 			//
 		}
-				
 		
-		String loginlist[] = {"Gerar Senha"}; //opcoes menu login
+		//Load Button
 		
-		ListView list = (ListView) findViewById(R.id.Ticketlist);
-		
-		ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, R.layout.login_list, loginlist);
-        
-		list.setAdapter(adapter);
-		
-		list.setBackgroundColor(Color.rgb(0, 201, 234));
 		
 		new TicketInitTask().execute();
 		
-		
-		
+		list = (ListView) findViewById(R.id.Ticketlist);
 		
 		list.setOnItemClickListener(new AdapterView.OnItemClickListener() {
 
 		    @Override
 		    public void onItemClick(AdapterView<?> parent, android.view.View view, int position, long id) {
-		    	
+		    	 	
 		    	// Gerar Ticket (Task)
+		    	String name = (String) parent.getItemAtPosition(position);
 		    	
-		    	new TicketCreationTask().execute();
-		    	//Toast.makeText(getApplicationContext(), ticketobj.toString(), Toast.LENGTH_SHORT).show();
+		    	if(name.equals("Gerar Senha")){
+		    		new TicketCreationTask().execute();
+		    		
+		    	}else if(name.equals("Remover Senha")){
+		    		new TicketRemotionTask().execute();
+		    	}
 		    }
 		});
 	}
@@ -91,6 +90,19 @@ public class TicketsActivity extends Activity {
 	}
 	
 	
+	public void createbtn(String scene){
+			
+		String loginlist[] = {scene}; //opcoes menu login
+		
+		ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, R.layout.login_list, loginlist);
+        
+		list.setAdapter(adapter);
+		
+		list.setBackgroundColor(Color.rgb(0, 201, 234));
+		
+	}
+	
+	
 	/**
 	 * Represents an asynchronous task 
 	 */
@@ -99,25 +111,31 @@ public class TicketsActivity extends Activity {
 		protected boolean CreateTicket()
 		{
 			try{
-								
 				
+				gt = Job.generateTicket(ticketobj.toString());
+				//Log.w("UCFRONTDESK", ">asa " + ticketobj.toString() ); 
+				
+				if (gt.length() > 1){
+					
+					return true;
+				}
+										
 			}catch(Exception e){
 				//Toast.makeText(getApplicationContext(), e.toString(), Toast.LENGTH_SHORT).show();
+				
 			}
-			
-			
-			return true;
-			
+		
+			return false;
 		}
 
 		protected Boolean doInBackground(String... params) 
 		{
 			if (CreateTicket())
 			{
-				
 				return true;
 			}
 			else
+				
 			{
 				return false;
 			}
@@ -128,15 +146,90 @@ public class TicketsActivity extends Activity {
 		{
 			if (result)
 			{
-				
 				//Modificar Butao Geracao (id e nome)
-				//Toast.makeText(getApplicationContext(), ticketobj.toString(), Toast.LENGTH_SHORT).show();
-				dialog.dismiss();
 				
-			}else
-			{
+				createbtn("Remover Senha");
 				dialog.dismiss();
-				//Toast.makeText(getApplicationContext(), "Ocorreu um Erro", Toast.LENGTH_SHORT).show();
+				new TicketInitTask().execute();
+				
+			}else{
+				
+				dialog.dismiss();
+				Toast.makeText(getApplicationContext(), "Ocorreu um Erro", Toast.LENGTH_SHORT).show();
+			}
+		}
+
+		@Override
+		protected void onPreExecute() 
+		{
+			dialog = ProgressDialog.show(TicketsActivity.this, "A Processar...", "Aguarde...", true);
+		}
+
+		@Override
+		protected void onProgressUpdate(Void... values) 
+		{
+			
+		}
+	}   
+	
+	
+	/**
+	 * Represents an asynchronous task 
+	 */
+	
+	private class TicketRemotionTask extends AsyncTask<String, Void, Boolean> 
+	{
+		
+		protected boolean RemoveTicket()
+		{
+			try{
+				
+				gt = Job.removeTicket(ticketobj.toString());
+				
+				Log.w("UCFRONTDESK", ">Remotion_TASK " + gt.length() ); 
+				
+				if (gt.length() > 1){
+					
+					return true;
+					
+				}
+										
+			}catch(Exception e){
+				//Toast.makeText(getApplicationContext(), e.toString(), Toast.LENGTH_SHORT).show();
+				Log.w("UCFRONTDESK", ">Remotion_TASK_Exception " + e.toString() ); 
+			}
+		
+			return false;
+		}
+
+		protected Boolean doInBackground(String... params) 
+		{
+			if (RemoveTicket())
+			{
+				return true;
+			}
+			else
+				
+			{
+				return false;
+			}
+		}      
+
+		@Override
+		protected void onPostExecute(Boolean result) 
+		{
+			if (result)
+			{
+				//Modificar Butao Geracao (id e nome)
+				
+				createbtn("Gerar Senha");
+				dialog.dismiss();
+				new TicketInitTask().execute();
+				
+			}else{
+				
+				dialog.dismiss();
+				Toast.makeText(getApplicationContext(), "Ocorreu um Erro", Toast.LENGTH_SHORT).show();
 			}
 		}
 
@@ -166,15 +259,16 @@ public class TicketsActivity extends Activity {
 				
 				init = Job.loadTicket(ticketobj.toString());
 				
-				//Log.w("UCFRONTDESK", ">asa " + init.toString() ); 
-				
 				if (init.length() > 0){
+					
 					return true;
+				
 				}else{
 					return false;
 				}
 								
 			}catch(Exception e){
+				Log.w("UCFRONTDESK", ">TICKETLOAD_TASK_Exception " + e.toString() ); 
 				return false;
 			}
 		}
@@ -197,23 +291,48 @@ public class TicketsActivity extends Activity {
 			if (result)
 			{	
 				try {
-					//int waiting = init.getInt("waiting");
+					int waiting = init.getInt("waiting");
 					int current = init.getInt("current");
-					int minutes = init.getInt("minutes");
+					int own = init.getInt("own");
+					int until = init.getInt("untilyou"); // Quando tem senha...até ele;
+					
+					String user_ticket = "---";
+							
+					if (own > 0){
+						createbtn("Remover Senha");
+						user_ticket = ""+ own;
+						
+						//Aqui mostra o until
+						waiting = until;
+					}else if(own == -1){
+						//Aqui mostra o waiting
+						createbtn("Gerar Senha");
+						
+					}
+					
+					//int minutes = init.getInt("minutes");
+					int minutes = 5 * waiting;
 					
 					job = true;
 					
 					final TextView current_view = (TextView) findViewById(R.id.current_ticket);
 					current_view.setText(""+current);
 					
+					final TextView userticket_view = (TextView) findViewById(R.id.user_ticket);
+					userticket_view.setText(""+user_ticket);
+					
 					final TextView minutes_view = (TextView) findViewById(R.id.time_wait_minutes);
 					minutes_view.setText(""+minutes+  " minutos");
 					
+					final TextView waitt_view = (TextView) findViewById(R.id.waiting_tickets);
+					waitt_view.setText(""+waiting);
+					
+					
 				} catch (JSONException e) {
+					Log.w("UCFRONTDESK", ">JSONEXCEPT_TICKETSTASK_Exception " + e.toString() ); 
 					job = false;
 				}
-
-				//Modificar Butao Geracao (id e nome)
+				
 				dialog.dismiss();
 				
 			}else
@@ -231,10 +350,11 @@ public class TicketsActivity extends Activity {
 			dialog = ProgressDialog.show(TicketsActivity.this, "A Processar...", "Aguarde...", true);
 		}
 
+
+	
 		@Override
 		protected void onProgressUpdate(Void... values) 
 		{
 		}
 	}   
-
 }

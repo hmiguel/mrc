@@ -22,6 +22,11 @@ import android.widget.Toast;
 
 public class LoginActivity extends Activity {
 
+	int uid;
+	String token;
+	
+	JSONObject ticketobj;
+	JSONObject l;
 	
 	private ProgressDialog dialog;
 	
@@ -32,6 +37,8 @@ public class LoginActivity extends Activity {
 		setContentView(R.layout.activity_login);
 		
 		String loginlist[] = {"Entrar"}; //opcoes menu login
+		
+		ticketobj = new JSONObject();
 		
 		ListView list = (ListView) findViewById(R.id.Loginlist);
 		
@@ -75,24 +82,22 @@ public class LoginActivity extends Activity {
 			JSONObject login = new JSONObject();
 			
 			try {
-				login.accumulate("email", email.getText().toString());
-				login.accumulate("password", password.getText().toString());
-			} catch (JSONException e) {
-				// TODO Auto-generated catch block
-				return false;
-			}
-			
-			JSONObject l = Job.LoginKey(login.toString());
-					
-			try {
-				String token = l.getString("token");
+				login.put("email", email.getText().toString());
+				login.put("password", password.getText().toString());
 				
-				return true;
 			} catch (JSONException e) {
-				// TODO Auto-generated catch block
+				
 				return false;
 			}
 			
+			l = Job.LoginKey(login.toString());
+					
+			if (l.length() > 1){
+					
+					return true;
+			}
+				
+			return false;
 		}
 
 		protected Boolean doInBackground(String... params) 
@@ -111,9 +116,29 @@ public class LoginActivity extends Activity {
 		{
 			if (result)
 			{
-				dialog.dismiss();
+				
 				Intent i = new Intent(LoginActivity.this, HomeActivity.class);
-				startActivity(i);
+				
+				String json; 
+	    		
+		    	try {
+		    		ticketobj.put("uid", l.getInt("uid")); // add UID
+					ticketobj.put("token", l.getString("token")); //add Token
+					json = ticketobj.toString();
+										
+					i.putExtra("ticket", json );
+					
+					startActivity(i);
+					
+					dialog.dismiss();
+					
+		    	} catch (JSONException e) {
+					// TODO Auto-generated catch block
+		    		Log.w("UCFRONTDESK", "Content: " + ticketobj.toString() ); 
+				}
+				
+				
+				
 			}else
 			{
 				dialog.dismiss();

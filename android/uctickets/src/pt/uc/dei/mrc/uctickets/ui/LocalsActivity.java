@@ -50,6 +50,7 @@ public class LocalsActivity extends Activity {
 			Intent intent = getIntent(); //get intent
 			String ticket = intent.getStringExtra("ticket"); //get ticket json string
 			ticketobj = new JSONObject(ticket);
+			
 		} catch (JSONException e) {
 			// TODO Auto-generated catch block
 			//
@@ -93,17 +94,17 @@ public class LocalsActivity extends Activity {
 		    	
 		    	try {
 		    		// update title
-		    		String title = ticketobj.getString("title") + " - " + l.getName();
-		    		ticketobj.put("title", title);  
+		    		String[] b = ticketobj.getString("title").split("-");
+		    		String title = b[0] + "- " + l.getName();
 		    		
-					ticketobj.accumulate("lid", l.getLID()); // add LID to json object
+		    		ticketobj.put("title", title);  
+					ticketobj.put("lid", l.getLID()); // add LID to json object
 					json = ticketobj.toString();
 					i.putExtra("ticket", json );
 					startActivity(i);
 					
 				} catch (JSONException e) {
-					// TODO Auto-generated catch block
-					//e.printStackTrace();
+					
 				}
 		    	
 		
@@ -120,9 +121,9 @@ public class LocalsActivity extends Activity {
 		protected boolean loadLocals()
 		{
 			try{
-				locallist = Job.localslist();
+				locallist = Job.localslist(ticketobj.getInt("sid"));
 				
-				Log.w("UCFRONTDESK", ">>> " + locallist.get(0).getName() ); 
+				//Log.w("UCFRONTDESK", ">>> " + locallist.get(0).getName() ); 
 				
 			}catch(Exception e){
 				Toast.makeText(getApplicationContext(), e.toString(), Toast.LENGTH_SHORT).show();
@@ -141,8 +142,6 @@ public class LocalsActivity extends Activity {
 		{
 			if (loadLocals())
 			{
-				
-				
 				return true;
 			}
 			else
