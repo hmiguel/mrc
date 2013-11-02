@@ -1,22 +1,43 @@
 package pt.uc.dei.mrc.uctickets.ui;
 
-import android.os.Bundle;
-import android.app.Activity;
-import android.view.Menu;
+import java.util.ArrayList;
 
-public class MapsDirectionsActivity extends Activity {
+import org.jsoup.Jsoup;
+
+import android.app.Activity;
+import android.os.Bundle;
+import android.widget.ArrayAdapter;
+import android.widget.ListView;
+
+public class MapsDirectionsActivity extends Activity{
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_maps_directions);
-	}
+		
+		Bundle extras = getIntent().getExtras();
+		
 
-	@Override
-	public boolean onCreateOptionsMenu(Menu menu) {
-		// Inflate the menu; this adds items to the action bar if it is present.
-		getMenuInflater().inflate(R.menu.maps_directions, menu);
-		return true;
+		if (extras != null) {
+			ArrayAdapter<String> adapter;
+			ArrayList<String> texto = extras.getStringArrayList("textoMap");
+			ArrayList<String> aparece = new ArrayList<String>();
+			
+			ListView apre = (ListView)findViewById(R.id.listView);
+			
+			String textoApre = "";
+			
+			for(String dir : texto){
+				textoApre = Jsoup.parse(dir).text();
+				aparece.add(textoApre);
+				
+			}
+			
+			adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, aparece);
+			apre.setAdapter(adapter);
+			
+		}
+		
 	}
-
 }
