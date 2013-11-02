@@ -8,7 +8,7 @@ public class Service {
 	//private int tid;  // ticket id
 		private String name; // ticket hash number
 		private int sid; // ticket number
-	
+		private String info;
 	    
 	    public int getSID(){
 	    	return sid;
@@ -29,6 +29,17 @@ public class Service {
 	    	this.name = name;
 	    }
 	    
+	    public String getInfo(){
+	    	
+	    	return info;
+	    }
+	    
+	    public void setInfo(String info){
+	    	
+	    	this.info = info;
+	    }
+	    
+	    
 	    public Service(){}
 	    
 	    @Override
@@ -40,7 +51,7 @@ public class Service {
 		{
 			this.name =	service.getString("name");
 			this.sid =	service.getInt("sid");
-			
+			this.info =	service.getString("info");
 			return this;
 		}
 }

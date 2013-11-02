@@ -7,10 +7,13 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import pt.uc.dei.mrc.uctickets.models.ActiveTicket;
-import pt.uc.dei.mrc.uctickets.models.Local;
-import pt.uc.dei.mrc.uctickets.models.Service;
 import android.util.Log;
+
+
+import pt.uc.dei.mrc.uctickets.models.ActiveTicket;
+import pt.uc.dei.mrc.uctickets.models.Service;
+import pt.uc.dei.mrc.uctickets.models.Local;
+import pt.uc.dei.mrc.uctickets.models.Login;
 
 
 /*
