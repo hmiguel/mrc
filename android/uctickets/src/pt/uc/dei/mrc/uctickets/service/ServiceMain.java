@@ -1,5 +1,6 @@
 package pt.uc.dei.mrc.uctickets.service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.json.JSONException;
@@ -159,6 +160,8 @@ public class ServiceMain extends Service
 	{
 		private List <ActiveTicket> tickets;
 		
+		private List <JSONObject> notify;
+		
 		protected boolean loadTickets()
 		{
 			try{
@@ -186,8 +189,39 @@ public class ServiceMain extends Service
 
 		protected Boolean doInBackground(String... params) 
 		{
+			notify = new ArrayList<JSONObject>();
+			
 			if (loadTickets())
 			{
+				
+				for (ActiveTicket ticket : tickets) { // Percorre lista de tickets
+									
+									//Verifica se existe algum proximo do limite (<4)
+									if (ticket.getCurrentTicket() - ticket.getOwnTicket() < 4){
+										
+										try {
+											int lid = ticket.getLID();
+											int sid = ticket.getSID();
+											int uid = obj.getInt("uid");
+												
+											// Get Data
+											JSONObject j = Job.WaitingPeople(sid, lid, uid);
+											
+											int wait = j.getInt("waiting");
+											
+											if (wait > -1 && wait < 4){				
+												//Add object to notify
+												notify.add(j);
+												
+											}
+											
+										} catch (JSONException e) {
+											//
+										}
+									}
+				}
+				
+				
 				return true;
 			}
 			else
@@ -201,35 +235,11 @@ public class ServiceMain extends Service
 		{
 			if (result)
 			{
-					for (ActiveTicket ticket : tickets) { // Percorre lista de tickets
-					
-					//Verifica se existe algum proximo do limite (<4)
-					if (ticket.getCurrentTicket() - ticket.getOwnTicket() < 4){
-						
-						try {
-							int lid = ticket.getLID();
-							int sid = ticket.getSID();
-							int uid = obj.getInt("uid");
-								
-							// Get Data
-							JSONObject j = Job.WaitingPeople(sid, lid, uid);
-							
-							int wait = j.getInt("waiting");
-							
-							if (wait > -1 && wait < 4){				
-								//Create Notification
-								showNotification(getApplicationContext(), j);
-								
-							}
-							
-						} catch (JSONException e) {
-							//
-						}
-					}
+				//Show Notification 
 				
+				for(JSONObject n: notify){
+					showNotification(getApplicationContext(), n);
 				}
-				/* Notification */
-				//populateListView();
 				
 			}
 		

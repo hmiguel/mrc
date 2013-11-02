@@ -183,7 +183,7 @@ public class HomeActivity extends Activity {
 				}
 				
 				//update  
-				Log.w("UCFRONTDESK", "Thread " + counter);
+				//Log.w("UCFRONTDESK", "Thread " + counter);
 			}
 		}
 		
@@ -247,8 +247,7 @@ public class HomeActivity extends Activity {
 				//locallist = Job.localslist(ticketobj.getInt("sid"));
 				List <ActiveTicket> new_atlist = Job.activeticketlist(ticketobj.getInt("uid"));
 				
-				//Log.w("UCFRONTDESK", "Thread_na " + new_atlist.size());
-				
+			
 				if (atlist != null){
 					if	(!atlist.equals(new_atlist) && new_atlist.size() > 0){
 						atlist = new_atlist;

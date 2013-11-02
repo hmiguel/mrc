@@ -35,12 +35,16 @@ public class Job {
 		
 		try {
 			w = ServerAPI.get("ticket/waiting/" + sid + "/" + lid + "/" + uid );
+			
 			w.put("lid", lid);
 			w.put("sid", sid);
+			
 			return w;
 			
 		} catch (JSONException e) {
 			// TODO Auto-generated catch block
+			
+		} catch (Exception e){
 			
 		}
 		

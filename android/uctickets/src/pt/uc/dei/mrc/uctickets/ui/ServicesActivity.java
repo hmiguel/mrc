@@ -13,7 +13,10 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.app.ActionBar.LayoutParams;
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.app.Dialog;
 import android.app.ProgressDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
 import android.util.Log;
@@ -68,6 +71,29 @@ public class ServicesActivity extends Activity {
 		return true;
 	}
 	
+	private AlertDialog alert;
+	
+	private void ServiceInfoDialog(String desc) { 
+	
+		AlertDialog.Builder builder = new AlertDialog.Builder(this); 
+		
+		builder.setPositiveButton("Ok", new DialogInterface.OnClickListener() { 
+			public void onClick(DialogInterface arg0, int arg1) { 
+					alert.dismiss();
+				} 
+		});
+		
+		
+		builder.setTitle("Info"); 
+		builder.setMessage(desc);
+		 
+		alert = builder.create(); 
+		alert.show();
+		
+	
+	}
+
+	
 	private void populateListView() {
 		   
 		ListView list = (ListView) findViewById(R.id.Servicelist);
@@ -77,7 +103,23 @@ public class ServicesActivity extends Activity {
 		list.setAdapter(adapter);
 
 		list.setBackgroundColor(Color.rgb(0, 201, 234));
+		
+		
 	
+		
+		list.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
+			
+			 @Override
+			 public boolean onItemLongClick(AdapterView<?> parent, android.view.View view, int position, long id) {
+			    	
+				 		// Pop-Up com a Descrição dos Serviços
+				 		ServiceInfoDialog("Pagamentos");
+				 		
+				 		return true;
+			 }
+			
+		});
+		
 		
 		list.setOnItemClickListener(new AdapterView.OnItemClickListener() {
 
@@ -202,7 +244,7 @@ public class ServicesActivity extends Activity {
 				
 			}
 			
-			if (desks == null){	
+			if (desks == null ){	
 				
 				return false;
 			}
