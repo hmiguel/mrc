@@ -12,14 +12,13 @@ import org.json.JSONObject;
 import pt.uc.dei.mrc.uctickets.apiclient.Job;
 import pt.uc.dei.mrc.uctickets.models.ActiveTicket;
 import pt.uc.dei.mrc.uctickets.service.ServiceMain;
-
-import android.os.AsyncTask;
-import android.os.Bundle;
-import android.os.Handler;
 import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.graphics.Color;
+import android.os.AsyncTask;
+import android.os.Bundle;
+import android.os.Handler;
 import android.util.Log;
 import android.view.Menu;
 import android.view.View;
@@ -29,7 +28,6 @@ import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.SimpleAdapter;
 import android.widget.TextView;
-import android.widget.Toast;
 
 public class HomeActivity extends Activity {
 

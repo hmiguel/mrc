@@ -8,26 +8,16 @@ import org.json.JSONObject;
 
 import pt.uc.dei.mrc.uctickets.apiclient.Job;
 import pt.uc.dei.mrc.uctickets.models.Local;
-import pt.uc.dei.mrc.uctickets.models.Service;
-
-
-import android.os.AsyncTask;
-import android.os.Bundle;
 import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.graphics.Color;
-import android.util.Log;
+import android.os.AsyncTask;
+import android.os.Bundle;
 import android.view.Menu;
-import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
-import android.widget.Button;
-import android.widget.EditText;
-import android.widget.LinearLayout;
 import android.widget.ListView;
-import android.widget.RadioButton;
-import android.widget.RadioGroup;
 import android.widget.Toast;
 
 public class LocalsActivity extends Activity {

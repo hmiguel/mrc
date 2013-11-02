@@ -196,7 +196,7 @@ containing a value of this type.
         public static final int Servicelist=0x7f050013;
         public static final int Ticketlist=0x7f050023;
         public static final int Ticketlistview=0x7f050009;
-        public static final int action_settings=0x7f050024;
+        public static final int action_settings=0x7f050025;
         public static final int current_ticket=0x7f05001a;
         public static final int current_ticket_text=0x7f050019;
         public static final int email_login=0x7f05000c;
@@ -217,6 +217,7 @@ containing a value of this type.
         public static final int terrain=0x7f050003;
         public static final int textView1=0x7f050008;
         public static final int textView2=0x7f050006;
+        public static final int textview=0x7f050024;
         public static final int time_lay=0x7f05001d;
         public static final int time_wait_fixo=0x7f05001e;
         public static final int time_wait_minutes=0x7f05001f;
@@ -239,6 +240,7 @@ containing a value of this type.
         public static final int activity_services=0x7f030007;
         public static final int activity_tickets=0x7f030008;
         public static final int login_list=0x7f030009;
+        public static final int popupview=0x7f03000a;
     }
     public static final class menu {
         public static final int as=0x7f090000;

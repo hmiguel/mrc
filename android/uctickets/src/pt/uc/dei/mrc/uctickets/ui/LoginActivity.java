@@ -5,13 +5,12 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import pt.uc.dei.mrc.uctickets.apiclient.Job;
-import pt.uc.dei.mrc.uctickets.models.Login;
-import android.os.AsyncTask;
-import android.os.Bundle;
 import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.graphics.Color;
+import android.os.AsyncTask;
+import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
 import android.widget.AdapterView;

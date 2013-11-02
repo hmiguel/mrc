@@ -65,7 +65,7 @@ int id Loginlist 0x7f05000e
 int id Servicelist 0x7f050013
 int id Ticketlist 0x7f050023
 int id Ticketlistview 0x7f050009
-int id action_settings 0x7f050024
+int id action_settings 0x7f050025
 int id current_ticket 0x7f05001a
 int id current_ticket_text 0x7f050019
 int id email_login 0x7f05000c
@@ -86,6 +86,7 @@ int id spacer 0x7f050018
 int id terrain 0x7f050003
 int id textView1 0x7f050008
 int id textView2 0x7f050006
+int id textview 0x7f050024
 int id time_lay 0x7f05001d
 int id time_wait_fixo 0x7f05001e
 int id time_wait_minutes 0x7f05001f
@@ -106,6 +107,7 @@ int layout activity_maps_directions 0x7f030006
 int layout activity_services 0x7f030007
 int layout activity_tickets 0x7f030008
 int layout login_list 0x7f030009
+int layout popupview 0x7f03000a
 int menu as 0x7f090000
 int menu home 0x7f090001
 int menu locals 0x7f090002
