@@ -3,6 +3,7 @@ package pt.uc.dei.mrc.uctickets.ui;
 import android.os.Bundle;
 import android.os.Handler;
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.view.Menu;
 
@@ -18,11 +19,15 @@ public class MainActivity extends Activity {
 	
 	  // Splash screen timer
     private static int SPLASH_TIME_OUT = 3000;
+    
+    private static Context context;
  
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        
+        MainActivity.context = getApplicationContext();
  
         new Handler().postDelayed(new Runnable() {
  
@@ -43,5 +48,10 @@ public class MainActivity extends Activity {
             }
         }, SPLASH_TIME_OUT);
    }
+    
+    public static Context getAppContext()
+	{
+     	   return MainActivity.context;
+    	}
 
 }
