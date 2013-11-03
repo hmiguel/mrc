@@ -130,7 +130,7 @@ public class LocalsActivity extends Activity {
 			}
 			
 			if (locallist == null){	
-				Toast.makeText(getApplicationContext(), locallist.size(), Toast.LENGTH_SHORT).show();
+				Toast.makeText(getApplicationContext(), "Erro ao Carregar Locais!", Toast.LENGTH_SHORT).show();
 				return false;
 			}
 			

@@ -7,6 +7,9 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import android.content.Context;
+import android.content.SharedPreferences;
+import android.preference.PreferenceManager;
 import android.util.Log;
 
 
@@ -14,14 +17,13 @@ import pt.uc.dei.mrc.uctickets.models.ActiveTicket;
 import pt.uc.dei.mrc.uctickets.models.Service;
 import pt.uc.dei.mrc.uctickets.models.Local;
 import pt.uc.dei.mrc.uctickets.models.Login;
+import pt.uc.dei.mrc.uctickets.ui.HomeActivity;
 
 
-/*
- * Job contém metodos para chamar API da UCFRONTDESK
- *  
- */
 public class Job {
-		
+				
+
+	
 	public static JSONObject generateTicket(String data){
 		
 		JSONObject ticket = ServerAPI.post("ticket/generate", data);
@@ -34,7 +36,7 @@ public class Job {
 		JSONObject w;
 		
 		try {
-			w = ServerAPI.get("ticket/waiting/" + sid + "/" + lid + "/" + uid );
+			w = ServerAPI.get("ticket/waiting/" + sid + "/" + lid + "/" + uid);
 			
 			w.put("lid", lid);
 			w.put("sid", sid);

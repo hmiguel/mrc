@@ -20,13 +20,19 @@ import org.apache.http.params.HttpParams;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import pt.uc.dei.mrc.uctickets.ui.MainActivity;
+
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.util.Log;
 
 public class ServerAPI {
 
 	private static String path = "http://mrcserver.herokuapp.com/api/";
 	
-	//private static String path = "http://0.0.0.0:5000/api/";
+	//private static String path = "http://0.0.0.0:5000/api/"; //Correr Localmente
+	
+	
 	
 	private static JSONObject toJSONObject(String jsonString)
 	{
@@ -47,12 +53,10 @@ public class ServerAPI {
 	
 	public static JSONObject get(String call) throws JSONException
 	{
-		//SharedPreferences prefs = UCFrontDesk.getAppContext().getSharedPreferences("frontdesk", Context.MODE_PRIVATE);
-		//String token = prefs.getString("frontdesk.token", "");
-		
-		
-		String token = "abc";
-		
+				
+		SharedPreferences prefs = MainActivity.getAppContext().getSharedPreferences("ucfrontdesk", Context.MODE_PRIVATE);
+		String token = prefs.getString("ucfrontdesk.token", "");
+				
 		String url = path + call;
 
 		HttpResponse response = null;
@@ -64,7 +68,6 @@ public class ServerAPI {
 		HttpGet get = new HttpGet(url);
 
 		get.setHeader("Authorization", "UCFD " + token);
-		
 		
 		get.setHeader("content-type", "application/json;charset=UTF-8");
 		get.setHeader("Accept", "application/json;charset=UTF-8");
@@ -83,8 +86,8 @@ public class ServerAPI {
 
 			if (response.getStatusLine().getStatusCode() > 400)
 			{
-				String msg = response.getStatusLine().getReasonPhrase();
-				
+					String msg = response.getStatusLine().getReasonPhrase();
+					Log.w("UCFRONTDESK", "HTTP protocol error " + msg);
 				
 					return toJSONObject("");
 					
@@ -122,13 +125,17 @@ public class ServerAPI {
 	{
 		Log.w("UCFRONTDESK", "DATA: " + data);
 		
+		SharedPreferences prefs = MainActivity.getAppContext().getSharedPreferences("ucfrontdesk", Context.MODE_PRIVATE);
+		String token = prefs.getString("ucfrontdesk.token", "");
+		
 		String url = path + call;
 
 		HttpPost post = new HttpPost(url);
 		
 		post.setHeader("content-type", "application/json;charset=UTF-8");
 		post.setHeader("Accept", "application/json;charset=UTF-8");
-
+		post.setHeader("Authorization", "UCFD " + token);
+		
 		try
 		{
 			StringEntity entity = new StringEntity(data);
@@ -156,7 +163,7 @@ public class ServerAPI {
 			if (response.getStatusLine().getStatusCode() > 400)
 			{
 				String msg = response.getStatusLine().getReasonPhrase();
-				
+				Log.w("UCFRONTDESK", "HTTP protocol error " + msg);
 				
 				return toJSONObject("");
 				

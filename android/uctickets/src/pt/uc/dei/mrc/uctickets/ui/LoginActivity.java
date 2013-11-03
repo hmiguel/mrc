@@ -10,7 +10,9 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.app.Activity;
 import android.app.ProgressDialog;
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.util.Log;
 import android.view.Menu;
@@ -29,6 +31,7 @@ public class LoginActivity extends Activity {
 	JSONObject l;
 	
 	private ProgressDialog dialog;
+	private SharedPreferences prefs;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -128,6 +131,12 @@ public class LoginActivity extends Activity {
 										
 					i.putExtra("ticket", json );
 					
+					prefs = getSharedPreferences("ucfrontdesk", Context.MODE_PRIVATE);
+					
+					SharedPreferences.Editor prefsEdit = prefs.edit();
+					prefsEdit.putString("ucfrontdesk.token", l.getString("token"));
+					prefsEdit.commit();
+
 					startActivity(i);
 					
 					dialog.dismiss();

@@ -17,7 +17,7 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Handler;
 import android.app.Activity;
-import android.app.ProgressDialog;
+import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
 import android.util.Log;
@@ -29,27 +29,30 @@ import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.SimpleAdapter;
 import android.widget.TextView;
-import android.widget.Toast;
+
 
 public class HomeActivity extends Activity {
 
+	
 	ListView listview;
 	ListView tlist;
 	
-	
-	JSONObject ticketobj;
+	private static JSONObject ticketobj;
 	volatile boolean stop = false;
 	volatile boolean bdialog = true; 
-	
-	private int uid;
-	
+
 	private Thread background;
 	
-	private ProgressDialog dialog;
+	private static Context c;
+
 	 	
 	private List<ActiveTicket> atlist;
 	
 	private final Handler myHandler = new Handler();
+	
+	public static Context getContextOfApplication(){
+	    return c;
+	}
     
     final Runnable updateRunnable = new Runnable() {
         public void run() {
@@ -57,11 +60,14 @@ public class HomeActivity extends Activity {
         	new ActiveTicketsLoadTask().execute();
         }
     };
-	
+    
+   
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_home);
+		
+		c = getApplicationContext();
 		
 		try {
 			Intent intent = getIntent(); //get intent
@@ -89,6 +95,7 @@ public class HomeActivity extends Activity {
 		background = new Thread(new Task());
 		
 		background.start();
+		
 		
 		// BACKGROUND SYSTEM SERVICE
 		
@@ -161,8 +168,7 @@ public class HomeActivity extends Activity {
 			});
 	}
 	
-	private int counter = 0;
-	
+
 	
 	// Thread Actualização da Lista de Senhas
 	class Task implements Runnable {
@@ -174,7 +180,7 @@ public class HomeActivity extends Activity {
 				try {
 					myHandler.post(updateRunnable);
 					Thread.sleep(30000);
-					counter++;
+					
 					
 					//Verifica se há alterações;
 					
@@ -325,5 +331,6 @@ public class HomeActivity extends Activity {
 		{
 		}
 	}   
+	
 
 }
